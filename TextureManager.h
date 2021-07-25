@@ -9,6 +9,8 @@ class TextureManager
 private:
 	static TextureManager* inst;
 
+	std::map<std::string, SDL_Texture*> m_textureMap;
+
 	//private constructor so this class will only have one instance
 	TextureManager() {} 
 	~TextureManager() {}
@@ -24,6 +26,8 @@ public:
 
 		return inst;
 	}
+
+	void clearFromTextureMap(std::string id);
 
 	bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
 

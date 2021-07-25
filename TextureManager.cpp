@@ -1,4 +1,5 @@
 #include "TextureManager.h"
+#include "SDL_image.h"
 
 TextureManager* TextureManager::inst = 0;
 
@@ -54,4 +55,9 @@ void TextureManager::drawFrame(std::string id, int x, int y, int width, int heig
 	destRect.y = y;
 
 	SDL_RenderCopyEx(pRenderer, textureMap[id], &srcRect, &destRect, 0, 0, flip);
+}
+
+void TextureManager::clearFromTextureMap(std::string id)
+{
+	m_textureMap.erase(id);
 }

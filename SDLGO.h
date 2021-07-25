@@ -18,9 +18,14 @@ protected:
 	std::string m_textureID; //different textures for different objects
 
 public:
-	SDLGO(const LoaderParams* Params);
+	SDLGO();
 
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
+	virtual void load(const LoaderParams* Params);
+
+	Vector& getPosition() { return m_position; }
+	int getWidth() { return m_width; }
+	int getHeight() { return m_height; }
 };

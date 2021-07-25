@@ -1,7 +1,14 @@
 //Game class definitions - main will call these functions to create game instace
 #include <iostream>
+#include <vector>
 #include "Game.h"
-#include "GameObjects.h"
+#include "TextureManager.h"
+#include "Input.h"
+#include "GSM.h"
+#include "GOFactory.h"
+#include "MainMenuState.h"
+#include "MenuButton.h"
+#include "Animated.h"
 
 Game* Game::inst = 0;
 
@@ -10,10 +17,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 	//attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		std::cout << "SDL init success \n";
 		//init the window
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-
+		
+		std::cout << "SDL init success \n";
+		
 		if (m_pWindow != 0) //window init success
 		{
 			std::cout << "window creation success \n";
@@ -23,16 +31,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 			{
 				std::cout << "renderer creation success\n";
 				SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255); //sets background color using RGBA
-
-				//create game objects for testing
-				gameObjects.push_back(new Player(new LoaderParams(200, 150, 32, 32, "animate")));
-				gameObjects.push_back(new Enemy(new LoaderParams(200, 150, 32, 32, "animate")));
-
-				//pull png file for sprite
-				if (!TheTextureManager::Instance()->load("Assets/Simon/Idle.png", "animate", m_pRenderer))
-				{
-					return false;
-				}
 			}
 			else
 			{
@@ -52,8 +50,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 		return false; //SDL init fail
 	}
 
+	m_gameWidth = width;
+	m_gameHeight = height;
+
 	std::cout << "init success\n";
 	m_bRunning = true; //everything initiated successfully, start main loop
+
+	TheGameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
+	TheGameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
+	TheGameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
+	TheGameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
+
+	m_pGameStateMachine = new GameStateMachine();
+	m_pGameStateMachine->changeState(new MainMenuState());
 
 	return true;
 }
@@ -62,40 +71,9 @@ void Game::render()
 {
 	SDL_RenderClear(m_pRenderer); //clear renderer to draw color
 
-
-	//loop through objects and draw them
-	for (std::vector<GameObjects*>::size_type i = 0; i != gameObjects.size(); i++)
-	{
-		gameObjects[i]->draw();
-	}
+	m_pGameStateMachine->render();
 
 	SDL_RenderPresent(m_pRenderer); //draw to screen
-}
-
-void Game::update()
-{
-	//loop through game objects and update
-	for (std::vector<GameObjects*>::size_type i = 0; i != gameObjects.size(); i++)
-	{
-		gameObjects[i]->update();
-	}
-}
-
-void Game::handleEvents()
-{
-	SDL_Event event;
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			m_bRunning = false;
-			break;
-
-		default:
-			break;
-		}
-	}
 }
 
 void Game::clean()
@@ -106,11 +84,18 @@ void Game::clean()
 	SDL_Quit();
 }
 
-void Game::draw()
+void Game::handleEvents()
 {
-	//loop through game objects vector and draw each item
-	for (std::vector<GameObjects*>::size_type i = 0; i != gameObjects.size(); i++)
+	//IH = Input Handler (Input.h)
+	IH::Instance()->update();
+
+	if (IH::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
 	{
-		gameObjects[i]->draw();
+		m_pGameStateMachine->changeState(new PlayState());
 	}
+}
+
+void Game::update()
+{
+	m_pGameStateMachine->update();
 }

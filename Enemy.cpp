@@ -1,24 +1,33 @@
+#include "SDL.h"
 #include "Enemy.h"
 
-Enemy::Enemy(const LoaderParams* Params) : SDLGO(Params)
-{
-
-}
+Enemy::Enemy() : SDLGO() {}
 
 void Enemy::draw()
 {
 	SDLGO::draw();
-	//GameObjects::draw(pRenderer);
 }
 
 void Enemy::update()
 {
-	m_position.setX(m_position.getX() + 1);
-	m_position.setY(m_position.getY() + 1);
-	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+	m_currentFrame = int(((SDL_GetTicks() / 100) % 5));
+
+	if (m_position.getX() < 0)
+	{
+		m_velocity.setX(2);
+	}
+	else if (m_position.getX() > 600)
+	{
+		m_velocity.setX(-2);
+	}
+
+	SDLGO::update();
 }
 
-void Enemy::clean()
-{
+void Enemy::clean() {}
 
+void Enemy::load(const LoaderParams* Params)
+{
+	SDLGO::load(Params);
+	m_velocity.setX(2);
 }

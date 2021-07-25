@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 	Uint32 frameStart, frameTime;
 
-	if (Simon::Instance()->init("Simon", 350, 180, 1280, 720, false)) //first two numbers set position on screen, second two set SDL window size
+	if (Simon::Instance()->init("Simon", 350, 180, 640, 480, false)) //first two numbers set position on screen, second two set SDL window size
 	{ 
 		std::cout << "game init success!\n";    //alert for init success
 
