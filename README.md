@@ -9,10 +9,10 @@ https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/msvc2019/index.php
 and then this page:
 https://lazyfoo.net/tutorials/SDL/06_extension_libraries_and_loading_other_image_formats/windows/msvc2019/index.php
 
-You will also need to make sure that the Idle.png has the right filepath in Game.cpp for whatever location you choose to store the file. I recommend keeping it in the same location as the source and header files.
+You will also need to make sure that the assets in the folder Simon each have the right filepath in Game.cpp for whatever location you choose to store the file. I recommend keeping them all in the same location as the source and header files.
 
 After following these steps, the project should run with no issues.
 
-Upon running the game, you will see two animated images run across the screen in different directions at different speeds.
+NOTE: The files contained in the TinyXML folder were not written by me but are necessary for parsing the xml file for the game.
 
-In the future, Simon will have tilemaps that the player can move the character around on as well as enemies to defeat and items to collect.
+Upon running the game, you will see two animated images. The little blue man can be controlled by you (the user), while the chicken is the enemy and runs across the screen. If the user collides with the chicken, the game is over.
