@@ -3,7 +3,6 @@
 #include "Game.h"
 #include "MainMenuState.h"
 #include "PlayState.h"
-#include "Animated.h"
 #include "GameOverState.h"
 #include "Input.h"
 #include "PauseState.h"

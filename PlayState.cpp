@@ -10,12 +10,12 @@
 #include "GameOverState.h"
 #include "LoaderParams.h"
 #include "StateParser.h"
+#include "Fruit.h"
 
 const std::string PlayState::s_playID = "PLAY";
 
 void PlayState::update()
 {
-	//pLevel->render();
 	
 	if (IH::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
@@ -28,9 +28,14 @@ void PlayState::update()
 		m_gameObjects[i]->update();
 	}
 
-	if(checkCollision(dynamic_cast<SDLGO*>(m_gameObjects[0]), dynamic_cast<SDLGO*>(m_gameObjects[1])))
+	if(checkCollision(dynamic_cast<SDLGO*>(m_gameObjects[1]), dynamic_cast<SDLGO*>(m_gameObjects[2])))
 	{
 		Simon::Instance()->getStateMachine()->pushState(new GameOverState());
+	}
+
+	if (checkCollision(dynamic_cast<SDLGO*>(m_gameObjects[1]), dynamic_cast<SDLGO*>(m_gameObjects[3])))
+	{
+		std::cout << "Collision";
 	}
 	
 }
@@ -43,16 +48,12 @@ void PlayState::render()
 		m_gameObjects[i]->draw();
 	}
 	
-	//pLevel->render();
 }
 
 bool PlayState::onEnter()
 {
 	StateParser stateParser;
 	stateParser.parseState("test.xml", s_playID, &m_gameObjects, &m_textureIDList);
-
-	/*LevelParser levelParser;
-	pLevel = levelParser.parseLevel("SimonMap.tmx");*/
 	
 	std::cout << "entering PlayState" << std::endl;
 	

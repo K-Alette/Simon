@@ -8,7 +8,8 @@
 #include "GOFactory.h"
 #include "MainMenuState.h"
 #include "MenuButton.h"
-#include "Animated.h"
+#include "Fruit.h"
+#include "Background.h"
 
 Game* Game::inst = 0;
 
@@ -56,10 +57,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 	std::cout << "init success\n";
 	m_bRunning = true; //everything initiated successfully, start main loop
 
+	TheGameObjectFactory::Instance()->registerType("Background", new BackgroundCreator());
 	TheGameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	TheGameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
 	TheGameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
-	TheGameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
+	TheGameObjectFactory::Instance()->registerType("Fruit", new FruitCreator());
 
 	m_pGameStateMachine = new GameStateMachine();
 	m_pGameStateMachine->changeState(new MainMenuState());

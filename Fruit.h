@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __Enemy__
-#define __Enemy__
+#ifndef __Fruit__
+#define __Fruit__
 #include <string>
 #include "SDLGO.h"
 #include "GOFactory.h"
 
-class Enemy : public SDLGO //inherit from SDLGO
+class Fruit : public SDLGO //inherit from SDLGO
 {
 public:
-	Enemy();
+	Fruit();
 
 	void draw();
 	void update();
@@ -17,12 +17,12 @@ public:
 
 };
 
-class EnemyCreator : public BaseCreator //enemy object creator derived from BaseCreator class
+class FruitCreator : public BaseCreator //enemy object creator derived from BaseCreator class
 {
 	GameObjects* createGameObject() const
 	{
-		return new Enemy();
+		return new Fruit();
 	}
 };
 
-#endif // __Enemy__
+#endif // __Fruit__

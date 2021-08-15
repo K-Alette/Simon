@@ -16,11 +16,12 @@ void Player::update()
 
 	m_currentFrame = int(((SDL_GetTicks() / 100) % 5));
 
-	if (m_position.getY() == 330)
+	//update player position for jumping
+	if (m_position.getY() == 280)
 	{
 		m_velocity.setY(2);
 	}
-	if (m_position.getY() == 380 && m_velocity.getY() == 2)
+	if (m_position.getY() == 340 && m_velocity.getY() == 2)
 	{
 		m_velocity.setY(0);
 	}
@@ -39,10 +40,7 @@ void Player::handleMovement(Vector velocity)
 
 void Player::handleInput()
 {
-	/*Vector* target = IH::Instance()->getMousePosition();
-	m_velocity = *target - m_position;
-	m_velocity /= 50;*/
-
+	//check if player is pressing keys and set velocity of player accordingly
 	if (IH::Instance()->isKeyDown(SDL_SCANCODE_A))
 	{
 		m_velocity.setX(-2);
@@ -51,7 +49,12 @@ void Player::handleInput()
 	{
 		m_velocity.setX(2);
 	}
-	if (IH::Instance()->isKeyDown(SDL_SCANCODE_SPACE) && m_position.getY() == 380)
+	else if (IH::Instance()->isKeyDown(SDL_SCANCODE_A) == false && IH::Instance()->isKeyDown(SDL_SCANCODE_D) == false)
+	{
+		m_velocity.setX(0);
+	}
+	//for jumping
+	if (IH::Instance()->isKeyDown(SDL_SCANCODE_SPACE) && m_position.getY() == 340)
 	{
 		m_velocity.setY(-2);
 	}

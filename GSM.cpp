@@ -82,7 +82,6 @@ void GameStateMachine::render()
 
 void GameStateMachine::popState()
 {
-	//popStateFlag = true;
 	if (!m_gameStates.empty())
 	{
 		if (m_gameStates.back()->onExit())
@@ -95,8 +94,6 @@ void GameStateMachine::popState()
 
 void GameStateMachine::changeState(GameState* pState)
 {
-	//changeStateFlag = true;
-	//newState = pState;
 	if (!m_gameStates.empty())
 	{
 		if (m_gameStates.back()->getStateID() == pState->getStateID())

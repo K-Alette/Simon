@@ -2,40 +2,50 @@
 <STATES>
 	<MENU>
 		<TEXTURES>
-			<texture filename="Assets/Simon/PlayButton.png" ID="playbutton"/>
-			<texture filename="Assets/Simon/ExitButton.png" ID="exitbutton"/>
+			<texture filename="Assets/Background.png" ID="background"/>
+			<texture filename="Assets/PlayButton.png" ID="playbutton"/>
+			<texture filename="Assets/ExitButton.png" ID="exitbutton"/>
 		</TEXTURES>
 		<OBJECTS>
+			<object type="Background" x="0" y="0" width="640" height="480" textureID="background" numFrames="0"/>
 			<object type="MenuButton" x="300" y="200" width="50" height="20" textureID="playbutton" numFrames="0" callbackID="1"/>
 			<object type="MenuButton" x="300" y="240" width="50" height="20" textureID="exitbutton" numFrames="0" callbackID="2"/>
 		</OBJECTS>
 	</MENU>
 	<PLAY>
 		<TEXTURES>
-			<texture filename="Assets/Simon/Idle.png" ID="simon"/>
-			<texture filename="Assets/Simon/EnemyRun.png" ID="chicken"/>
+			<texture filename="Assets/Background.png" ID="background"/>
+			<texture filename="Assets/Idle.png" ID="simon"/>
+			<texture filename="Assets/EnemyRun.png" ID="chicken"/>
+			<texture filename="Assets/Strawberry.png" ID="fruit"/>
 		</TEXTURES>
 		<OBJECTS>
-			<object type="Player" x="200" y="380" width="32" height="32" textureID="simon" numFrames="4"/>
-			<object type="Enemy" x="500" y="385" width="32" height="32" textureID="chicken" numFrames="4"/>
+			<object type="Background" x="0" y="0" width="640" height="480" textureID="background" numFrames="0"/>
+			<object type="Player" x="200" y="340" width="32" height="32" textureID="simon" numFrames="4"/>
+			<object type="Enemy" x="500" y="345" width="32" height="32" textureID="chicken" numFrames="4"/>
+			<object type="Fruit" x="300" y="0" width="32" height="32" textureID="fruit" numFrames="0"/>
 		</OBJECTS>
 	</PLAY>
 	<PAUSE>
 		<TEXTURES>
-			<texture filename="Assets/Simon/ResumeButton.png" ID="resumebutton"/>
-			<texture filename="Assets/Simon/PlayButton.png" ID="mainbutton"/>
+			<texture filename="Assets/Background.png" ID="background"/>
+			<texture filename="Assets/ResumeButton.png" ID="resumebutton"/>
+			<texture filename="Assets/MainButton.png" ID="mainbutton"/>
 		</TEXTURES>
 		<OBJECTS>
+			<object type="Background" x="0" y="0" width="640" height="480" textureID="background" numFrames="0"/>
 			<object type="MenuButton" x="300" y="200" width="50" height="20" textureID="mainbutton" numFrames="0" callbackID="1"/>
 			<object type="MenuButton" x="300" y="240" width="50" height="20" textureID="resumebutton" numFrames="0" callbackID="2"/>
 		</OBJECTS>
 	</PAUSE>	
 	<GAMEOVER>
 		<TEXTURES>
-			<texture filename="Assets/Simon/PlayButton.png" ID="mainbutton"/>
-			<texture filename="Assets/Simon/ResumeButton.png" ID="restartbutton"/>
+			<texture filename="Assets/Background.png" ID="background"/>
+			<texture filename="Assets/MainButton.png" ID="mainbutton"/>
+			<texture filename="Assets/ResumeButton.png" ID="restartbutton"/>
 		</TEXTURES>
-		<OBJECTS>	
+		<OBJECTS>
+			<object type="Background" x="0" y="0" width="640" height="480" textureID="background" numFrames="0"/>	
 			<object type="MenuButton" x="300" y="200" width="50" height="20" textureID="mainbutton" numFrames="0" callbackID="1"/>
 			<object type="MenuButton" x="300" y="240" width="50" height="20" textureID="restartbutton" numFrames="0" callbackID="2"/>
 		</OBJECTS>

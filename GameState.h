@@ -20,4 +20,6 @@ public:
 	virtual std::string getStateID() const = 0;
 };
 
+
+
 #endif // __GameState__
